@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Categories on JAMAAL ROACH</title>
-    <link>/categories/</link>
+    <link>http://jamaalroach.com/categories/</link>
     <description>Recent content in Categories on JAMAAL ROACH</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <copyright>2018 JROACH</copyright>
     
-	<atom:link href="/categories/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="http://jamaalroach.com/categories/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Visualisation</title>
-      <link>/categories/visualisation/</link>
+      <link>http://jamaalroach.com/categories/visualisation/</link>
       <pubDate>Fri, 19 Oct 2018 00:00:00 +0000</pubDate>
       
-      <guid>/categories/visualisation/</guid>
+      <guid>http://jamaalroach.com/categories/visualisation/</guid>
       <description></description>
     </item>
     

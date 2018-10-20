@@ -1,11 +1,11 @@
-baseurl = "http://jamaalroach.com"
+baseurl = "https://jamaalroach.com"
 languageCode = "en"
 title = "JAMAAL ROACH"
 copyright = "2018 JROACH"
 paginate = 3
 
 googleAnalytics = "Yout Google Analytics ID"
-enableRobotsTXT = true
+
 
 theme = "minimage"
 ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
