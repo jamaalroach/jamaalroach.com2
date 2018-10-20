@@ -1,0 +1,23 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1540009840366.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "1035758520",
+    "id" : "8A079488",
+    "lastKnownWriteTime" : 1540009903,
+    "last_content_update" : 1540009903328,
+    "path" : "~/website/newtest/minimage/content/page/contact.Rmd",
+    "project_path" : "content/page/contact.Rmd",
+    "properties" : {
+        "cursorPosition" : "1,9",
+        "scrollLine" : "0",
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 3,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_markdown"
+}

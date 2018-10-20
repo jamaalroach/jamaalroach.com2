@@ -1,0 +1,2 @@
+"0","temps50<-temps%>%filter(Year>1965)"
+"0","ggplot(temps50, aes(x=Month, y=Temp, group=Year))+geom_line()+theme_void()"

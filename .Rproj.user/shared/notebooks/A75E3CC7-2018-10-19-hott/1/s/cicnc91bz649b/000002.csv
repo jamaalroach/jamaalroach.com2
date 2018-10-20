@@ -1,0 +1,3 @@
+"0"," chart1<-ggplot(yavg, aes(x=Year, y=AVgTemp))+geom_line(colour=""coral"", size=0.6)+theme(panel.grid = element_line(colour = ""white""))+theme(axis.title.x = element_blank(), axis.ticks = element_line(color = ""white""), axis.text = element_text(colour=""gray59""))+geom_smooth()+theme(panel.background=element_rect(fill= ""white""), plot.background = element_rect(fill=""white""))+labs(y=""Annual Average Temperature (°C)"")+theme(axis.title.y = element_text(color=""coral"", face=""bold""))"
+"0","chart1<-ggplotly(chart1)"
+"0","chart1"

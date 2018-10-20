@@ -1,0 +1,7 @@
+"0","tempsgist<-""https://gist.githubusercontent.com/jamaalroach/bc8e31c8756813ad485ec100d921dd25/raw/19d08c5a991afa9ad338ba0183fb6720faa9b5be/temp.csv"""
+"0","temps<-read.csv(tempsgist) #creating dataframe from souce csv"
+"0","names(temps) <- c(""Temp"", ""Year"", ""Month"",""Country"", ""IOS3"", ""IOS2"") # renaming dataframe columns"
+"0","yavg<-temps%>%group_by(Year)%>%summarise(AVgTemp=round(mean(Temp),2))  # dataframe with annual average temperatures"
+"0","davg<-yavg%>%mutate(decade=ifelse(Year<1910,1900,ifelse(Year<1920, 1910,ifelse(Year<1930,1920,ifelse(Year<1940,1930, ifelse(Year<1950,1940, ifelse(Year<1960,1950,ifelse(Year<1970,1960,ifelse(Year<1980,1970,ifelse(Year<1990,1980,ifelse(Year<2000,1990,ifelse(Year<2010,2000,2010)))))))))))) #dataframe with grouping by decades"
+"0","dec<-davg%>%group_by(decade)%>%summarise(avgtemp=round(mean(AVgTemp),1), maxtemp=round(max(AVgTemp),1), mintemp=round(min(AVgTemp),1)) #calculating maximum, average and and minimum temperature by decade"
+"0","dec<-dec%>%mutate(maxoff=maxtemp+0.1, minoff=mintemp-0.1)"
