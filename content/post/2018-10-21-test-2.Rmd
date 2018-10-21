@@ -7,14 +7,14 @@ categories:
 tags:
   - Barbados
   - R
-slug: test-2
+slug: Barbados Is Hot
 description: Charting Local Warming In Barbados
 draft: no
 image: img/rays.jpg
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
+knitr::opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE)
 ```
 
 
@@ -120,6 +120,20 @@ chartxa
 I think this is really useful in highlighting how much hotter the last three decades have been in comparison to the past.Although the 2010's havent quite reached the high of the 2000's (yet), its low is above the high of every decade preceeding the 80s and is only 0.1 degrees lower than the highs of the 80's and 90's.  
 
 Another point that jumps out is the really small range recorded in the 1900's.What could be the reason for that?
+
+```{r}
+par(mar=c(3, 4, 3, 2), oma=c(0,0,0,0), bg="white", xpd=FALSE, xaxs="r", yaxs="i", mgp=c(2.1,.3,0), las=0, col.main="white",  tck=0, lend=1 )
+plot(0, 0, xlim=c(1900,2016), ylim=c(25.25, 27.50),type="n", bty="n", las=1, axes=FALSE)
+axis(1, seq(1900,2010,10), col="white", labels=FALSE, col.axis="gray59")
+axis(2,seq(25.25,27.50,0.50), labels = FALSE, col.axis="white", col="white" )
+mtext(side=2,line=3, "Decade Min-Max Range",col="gray59")
+rect(xleft=dec$decade+2, xright=dec$decade-2, ybottom=dec$mintemp, ytop=dec$maxtemp, border=FALSE, col="gray77")
+segments(y0=dec$mintemp, x0=dec$decade-3 , x1=dec$decade+3, lwd=3, lend=1, col = "steelblue")
+segments(y0=dec$maxtemp, x0=dec$decade-3 , x1=dec$decade+3, lwd=3, lend=1, col="red")
+textxy(X=dec$decade, Y=dec$maxoff, labs = dec$maxtemp, offset=0, cex=.65)
+textxy(X=dec$decade, Y=dec$minoff, labs = dec$mintemp, offset=0, cex=.65)
+
+```
 
 # Temperature Anomalies
 

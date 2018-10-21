@@ -1,11 +1,11 @@
 baseurl = "https://jamaalroach.com"
 languageCode = "en"
-title = "JAMAAL ROACH"
+title = "Jamaal Roach"
 copyright = "2018 JROACH"
 paginate = 3
 
 googleAnalytics = "     "
-disqusShortname = "jamaalroach"
+disqusShortname = "jamaalroach-com"
 
 theme = "minimage"
 ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
