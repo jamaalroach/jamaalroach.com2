@@ -2,31 +2,31 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Tags on JAMAAL ROACH</title>
-    <link>http://jamaalroach.com/tags/</link>
+    <link>/tags/</link>
     <description>Recent content in Tags on JAMAAL ROACH</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <copyright>2018 JROACH</copyright>
     <lastBuildDate>Fri, 19 Oct 2018 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="http://jamaalroach.com/tags/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="/tags/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Barbados</title>
-      <link>http://jamaalroach.com/tags/barbados/</link>
+      <link>/tags/barbados/</link>
       <pubDate>Fri, 19 Oct 2018 00:00:00 +0000</pubDate>
       
-      <guid>http://jamaalroach.com/tags/barbados/</guid>
+      <guid>/tags/barbados/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Visualisation</title>
-      <link>http://jamaalroach.com/tags/visualisation/</link>
+      <link>/tags/visualisation/</link>
       <pubDate>Fri, 19 Oct 2018 00:00:00 +0000</pubDate>
       
-      <guid>http://jamaalroach.com/tags/visualisation/</guid>
+      <guid>/tags/visualisation/</guid>
       <description></description>
     </item>
     

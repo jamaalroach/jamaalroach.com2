@@ -7,7 +7,7 @@ output: html_document
 
 Hi I'm Jamaal Roach and welcome to my blog. 
 
-![](/img/me2.jpg)
+![](/img/me.jpg)
 
 This tiny corner of the internet is a space for my fidling around with the statistical R to analyse and visualise data. The posts will mostly be driven by curiosity where a random thought sends me on a quest to find an answer from the available information. I intend to cover a wide range but don't be too alarmed if there are more than a few posts about football #FC Barcelona. I'm from [Barbados](https://www.visitbarbados.org/) so you can expect more than a few [Bajan](https://barbados.org/people/index.htm#.W8ql5GhKhhE) and Caribbean culture references along the way.
 

@@ -2,22 +2,22 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Visualisation on JAMAAL ROACH</title>
-    <link>http://jamaalroach.com/tags/visualisation/</link>
+    <link>/tags/visualisation/</link>
     <description>Recent content in Visualisation on JAMAAL ROACH</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <copyright>2018 JROACH</copyright>
     <lastBuildDate>Fri, 19 Oct 2018 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="http://jamaalroach.com/tags/visualisation/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="/tags/visualisation/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>SPRING GARDEN ON FYAH!</title>
-      <link>http://jamaalroach.com/post/hott/</link>
+      <link>/post/hott/</link>
       <pubDate>Fri, 19 Oct 2018 00:00:00 +0000</pubDate>
       
-      <guid>http://jamaalroach.com/post/hott/</guid>
+      <guid>/post/hott/</guid>
       <description>The QuestionBarbados is hot. It was always hot, its a tropical paradise in the Caribbean its supposed to be hot but for Bajans, in recent times it feels hotter than ever before. The heat is oppressive , making a five minute walk at midday seem like a journey through hell and forget about driving with your window down to enjoy the breeze.
 This is no surprise, everyone knows the earth is getting warmer.</description>
     </item>
