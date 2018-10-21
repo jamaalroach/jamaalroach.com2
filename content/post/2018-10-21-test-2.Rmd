@@ -1,13 +1,13 @@
 ---
 title: test 2
-author: ''
+author: 'JR'
 date: '2018-10-21'
 slug: test-2
 categories: []
 tags: []
-description: ''
+description: 'Charting Local Warming In Barbados'
 draft: no
-image: 'img/rays.jpg'
+image: 'img/heatwave.jpg'
 ---
 
 ```{r setup, include=FALSE}
