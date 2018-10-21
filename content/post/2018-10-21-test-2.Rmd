@@ -1,17 +1,20 @@
 ---
 title: Local Warming In Barbados In Three Charts
-author: 'JR'
+author: JR
 date: '2018-10-21'
+categories:
+  - Charts
+tags:
+  - Barbados
+  - R
 slug: test-2
-categories: [Charts]
-tags: [R, Barbados]
-description: 'Charting Local Warming In Barbados'
+description: Charting Local Warming In Barbados
 draft: no
-image: 'img/rays.jpg'
+image: img/rays.jpg
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE)
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
 ```
 
 
