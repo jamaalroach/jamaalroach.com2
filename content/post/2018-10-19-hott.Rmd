@@ -5,7 +5,6 @@ date: '2018-10-19'
 slug: hott
 categories: [Visualisation]
 tags: [Barbados, Visualisation]
-Summary: 'Charting Local Warming In Barbados'
 image: "/img/rays.jpg."
 weight: 1
 output:
