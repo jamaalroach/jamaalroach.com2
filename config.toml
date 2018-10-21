@@ -5,7 +5,7 @@ copyright = "2018 JROACH"
 paginate = 3
 
 googleAnalytics = "Yout Google Analytics ID"
-disqusShortname = "jamaalroach"
+
 
 theme = "minimage"
 ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
