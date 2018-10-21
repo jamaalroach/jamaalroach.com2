@@ -1,0 +1,19 @@
+---
+title: test 2
+author: ''
+date: '2018-10-21'
+slug: test-2
+categories: []
+tags: []
+description: ''
+draft: yes
+image: 'img/rays.jpg'
+---
+
+## はじめに
+
+## 〜〜とは
+
+## やってみる
+
+## まとめ
