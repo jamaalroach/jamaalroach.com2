@@ -4,8 +4,8 @@ title = "JAMAAL ROACH"
 copyright = "2018 JROACH"
 paginate = 3
 
-googleAnalytics = "Yout Google Analytics ID"
-
+googleAnalytics = ""
+disqusShortname = "jamaalroach"
 
 theme = "minimage"
 ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]

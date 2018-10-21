@@ -7,7 +7,7 @@ categories: [Visualisation]
 tags: [Barbados, Visualisation]
 data: '2018-10-19T21:37:50-04:00'
 Summary: 'Charting Local Warming In Barbados'
-image: 'img/rays.jpg.'
+image: 'img/me.jpg.'
 weight: 1
 output:
   blogdown::html_page:
