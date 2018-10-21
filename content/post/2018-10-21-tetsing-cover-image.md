@@ -6,7 +6,7 @@ slug: tetsing-cover-image
 categories: []
 tags: []
 description: ''
-draft: no
+draft: yes
 image: 'img/rays.jpg'
 ---
 
