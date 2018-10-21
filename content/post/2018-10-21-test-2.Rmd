@@ -7,7 +7,7 @@ categories: [Charts]
 tags: [R, Barbados]
 description: 'Charting Local Warming In Barbados'
 draft: no
-image: 'img/heatwave.jpg'
+image: 'img/rays.jpg'
 ---
 
 ```{r setup, include=FALSE}
