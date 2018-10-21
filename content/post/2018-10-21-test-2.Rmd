@@ -3,8 +3,8 @@ title: Local Warming In Barbados In Three Charts
 author: 'JR'
 date: '2018-10-21'
 slug: test-2
-categories: []
-tags: []
+categories: [Charts]
+tags: [R, Barbados]
 description: 'Charting Local Warming In Barbados'
 draft: no
 image: 'img/heatwave.jpg'
