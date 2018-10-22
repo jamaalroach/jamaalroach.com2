@@ -1,23 +1,23 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Charts on JamaalRoach</title>
-    <link>/categories/charts/</link>
-    <description>Recent content in Charts on JamaalRoach</description>
+    <title>Dataviz on JamaalRoach</title>
+    <link>/categories/dataviz/</link>
+    <description>Recent content in Dataviz on JamaalRoach</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <copyright>2018 JROACH</copyright>
     <lastBuildDate>Sun, 21 Oct 2018 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="/categories/charts/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="/categories/dataviz/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>Local Warming | Visualising Increasing Temperature In Barbados</title>
-      <link>/post/barbados-is-hot/</link>
+      <title>Local Warming | Visualising Temperature Increase In Barbados</title>
+      <link>/post/barbados-is-getting-hotter-in-four-charts/</link>
       <pubDate>Sun, 21 Oct 2018 00:00:00 +0000</pubDate>
       
-      <guid>/post/barbados-is-hot/</guid>
+      <guid>/post/barbados-is-getting-hotter-in-four-charts/</guid>
       <description>The QuestionBarbados is hot! It’s a tropical paradise in the Caribbean it was always hot but these days, thanks to global warming, it is hotter than ever before. Exactly how hot is it?
 The devil went to hell to escape the heat in Barbados
 &amp;mdash; You cant hear Jimmy (@CorinBailey) July 25, 2018  That sums it up perfectly, the question isn’t if Barbados is getting warmer, that’s a definite.</description>

@@ -1,14 +1,14 @@
 ---
-title: Local Warming | Visualising Increasing Temperature In Barbados  
+title: Local Warming | Visualising Temperature Increase In Barbados  
 author: JR
 date: '2018-10-21'
 categories:
-  - Charts
+    - DataViz
 tags:
   - Barbados
   - R
-slug: Barbados Is Hot
-description: Charting Local Warming In Barbados
+slug: Barbados is getting hotter in four charts
+description: 
 draft: no
 image: img/rays.jpg
 ---
@@ -32,19 +32,19 @@ library(calibrate)
 
 #The Question 
 
-[Barbados](https://www.visitbarbados.org/) is hot. It's a tropical paradise in the Caribbean it was always hot but these days, thanks to [global warming](https://www.nationalgeographic.com/environment/global-warming/global-warming-overview/?user.testname=none), it is hotter than ever before. Exactly how hot is it recently?
+[Barbados](https://www.visitbarbados.org/) is hot! It's a tropical paradise in the Caribbean it was always hot but these days, thanks to [global warming](https://www.nationalgeographic.com/environment/global-warming/global-warming-overview/?user.testname=none), it is hotter than ever before. Exactly how hot is it?
 
 ```{r echo=FALSE}
 
 blogdown::shortcode('tweet', '1022169368300376064')
 ```
-That sums it up perfectly, the question isn't if Barbados is getting warmer, that's a  definite. What I really wanted to know was what does warmer looks like and so I built some charts. 
+That sums it up perfectly, the question isn't if Barbados is getting warmer, that's a  definite. What I really wanted to know was what does warmer look like and so I built some charts. 
 
-The data manipulation and visualisation were done using [R](https://www.r-project.org/) and you can find the source data [here](https://gist.githubusercontent.com/jamaalroach/bc8e31c8756813ad485ec100d921dd25/raw/19d08c5a991afa9ad338ba0183fb6720faa9b5be/temp.csv)  and the code [here](https://github.com/jamaalroach/jamaalroach.com2/blob/master/content/post/2018-10-21-test-2.Rmd).
+The data manipulation and visualisation were done using [R](https://www.r-project.org/) and you can find the source data and code [here](https://gist.githubusercontent.com/jamaalroach/bc8e31c8756813ad485ec100d921dd25/raw/19d08c5a991afa9ad338ba0183fb6720faa9b5be/temp.csv) and [here](https://github.com/jamaalroach/jamaalroach.com2/blob/master/content/post/2018-10-21-test-2.Rmd).
 
 #The Data
 
-Barbados' monthly average temperature from 1901 -2015 was available from the [The World Bank Climate Knowledge Portal](http://sdwebx.worldbank.org/climateportal/index.cfm?page=country_historical_climate&ThisRegion=Latin%20America&ThisCcode=BRB). This was then used to calculate averages annually and over each decade in the period.
+Barbados' monthly average temperature from 1901 -2015 was available from the [The World Bank Climate Knowledge Portal](http://sdwebx.worldbank.org/climateportal/index.cfm?page=country_historical_climate&ThisRegion=Latin%20America&ThisCcode=BRB). This was then used to calculate annual averages and averages over each decade in the period.
 
 ```{r}
 tempsgist<-"https://gist.githubusercontent.com/jamaalroach/bc8e31c8756813ad485ec100d921dd25/raw/19d08c5a991afa9ad338ba0183fb6720faa9b5be/temp.csv"
@@ -83,7 +83,7 @@ chart1
 ```
 
 
-There is a lot of fluctuation year over year but the upward trajectory is clear. The blue trend line was added to help show the average rate of change over the period. You can see the temperature rising gradually from 1901 with an acceleration of the increase from 1970 onwards.Pre 1970 the temperature increased by 0.03 degrees per decade while after 1970 the increase was 0.14 degrees per decade.
+There is a lot of fluctuation year over year but the upward trajectory is clear. The blue trend line was added to help highlight the average rate of change over the period. You can see the temperature rising gradually from 1901 with an acceleration of the increase from 1970 onwards.Pre 1970 the temperature increased by 0.03 degrees per decade while after 1970 the increase was 0.14 degrees per decade.
 
 
 
@@ -91,7 +91,7 @@ There is a lot of fluctuation year over year but the upward trajectory is clear.
 
 #The Decade View
 
-This chart compares the the range between the minimum aand maximum annual average temperatures during each decade. 
+This chart compares the the range between the minimum and maximum annual average temperatures during each decade. 
 
 
 
@@ -130,7 +130,7 @@ ggplot(dec, aes(y=rev(dec$decade)))+geom_text(aes( x=dec$mintemp, y=rev(dec$deca
 
 
 
-I think this is really useful in highlighting how much hotter the last three decades have been in comparison to the past. Although the 2010's havent quite reached the high of the 2000's (yet), its low is above the high of every decade preceeding the 80s and is only 0.1 degrees lower than the highs of the 80's and 90's.  
+I think this is really useful in highlighting just how much hotter the last three decades have been in comparison to the past. Although the 2010's havent quite reached the high of the 2000's - **yet**, its low is above the high of every decade preceeding the 80s and is only 0.1 degrees lower than the highs of the 80's and 90's.  
 
 
 
@@ -139,7 +139,7 @@ I think this is really useful in highlighting how much hotter the last three dec
 
 # Temperature Anomalies
 
-A temperature anomaly is the difference between a location's actual recorded temperature and its baseline (long term average). A positive anomaly means it was was warmer than the baseline while a negative anomaly means it was cooler. This is a relative measure usually cited by climate scientists as it is more easily comparable over time than absolute measures. It is highly dependent on the time range chosen in calculating the long term average.
+A temperature anomaly is the difference between the recorded temperature and a baseline long term average. A positive anomaly means it was was warmer than the baseline while a negative anomaly means it was cooler. This is a relative measure usually cited by climate scientists as it is more easily comparable over time than absolute measures. It is however, highly dependent on the choice of time range used to calculate the long term average.
 
 
 ```{r}
@@ -170,7 +170,7 @@ chart2
 
 ```
 
-For the chart above the baseline used was the `r ltavg` which was average annual temperature over the 20th Century (1901-2000). Again the pattern of increasing temperature is seen with a consistent positive anomalies occuring after 1987. 
+For the chart above the baseline used was **`r ltavg`**, the average annual temperature over the 20th Century (1901-2000). Again the pattern of increasing temperature is clear, with persistent positive anomalies occuring after 1987. 
 
 ```{r}
 
@@ -194,7 +194,7 @@ chart5<- ggplot(yavg, aes(x=Year, y=stanomaly))+geom_bar(stat ="identity",aes(fi
 #Warming Stripes 
 
 The final chart is an application of the  popular [Warming Stripes](http://www.climate-lab-book.ac.uk/2018/warming-stripes/) visualisation by Ed Hawkins.
-Each stripe represents a year with the colours being representative of the annual avearge temperature.It is an elegant way to show the  increase over time using just a colour scale.
+Each stripe represents a year with the colour scale being representative of the range of annual avearge temperature over the period.It is an elegant way to show the  increase over time using just colours.
 
 
 ```{r}
@@ -220,9 +220,9 @@ chart3
 
 #Conclusion
 
-This was a case of quanitfying / visualising the obvious. Global warming is real and its affects are starting to be felt. Unfortunately small island states like Barbados will bear the brunt of the impact, while at the same time having the least ability to influence the current trajectory and [time is running out](https://www.un.org/sg/en/content/sg/statement/2018-10-08/statement-secretary-general-ipcc-special-report-global-warming-15-%C2%BAc).
+Global warming is real and the time to act [is running out](https://www.un.org/sg/en/content/sg/statement/2018-10-08/statement-secretary-general-ipcc-special-report-global-warming-15-%C2%BAc) . Unfortunately small island states like Barbados, who have the least ability to influence current trajectory, will be severely affected. At this rate the devil won't be returning to paradise any time soon.
 
-On the other hand there is plenty of time for you to comment below with your thoguhts.
+
 
 
 
