@@ -30,7 +30,6 @@ library(calibrate)
 ```
 
 
-#The Question 
 
 [Barbados](https://www.visitbarbados.org/) is hot! It's a tropical paradise in the Caribbean it was always hot but these days, thanks to [global warming](https://www.nationalgeographic.com/environment/global-warming/global-warming-overview/?user.testname=none), it is hotter than ever before. Exactly how hot is it?
 
