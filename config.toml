@@ -19,7 +19,14 @@ ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
   category = "categories"
   tag = "tags"
 
-
+[twitter]
+  card = "summary_large_image"
+  site = "@twittername"
+  creator = "@twitternameofcreator"
+  title = "Special Title for the Card"
+  description = "Special Description for the card max. 200 characters"
+  image = "https://example.com/great-picture.jpg"
+  
 [[menu.global]]
     name = "Contact"
     url = "/page/contact/"
