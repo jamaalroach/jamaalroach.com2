@@ -16,7 +16,7 @@ twitter:
   - card: "summary_large_image"
   - site: "@jamaalroach"
   - creator: "@jamaalroach"
-  - twImage: "img/rays-cover.jpg"
+  - twImage: img/rays.jpg
 ---
 
 
