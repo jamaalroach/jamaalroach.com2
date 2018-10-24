@@ -13,9 +13,10 @@ draft: no
 image: img/rays-cover.jpg
 
 twitter:
-  -card: "summary_large_image"
-  -site: "@jamaalroach"
-  -creator: "@jamaalroach"
+  - card: "summary_large_image"
+  - site: "@jamaalroach"
+  - creator: "@jamaalroach"
+  - image: "img/rays-cover.jpg"
 ---
 
 
@@ -131,7 +132,7 @@ chartxa<-ggplot(davg, aes(x=AVgTemp, y=decade, group=decade))+geom_point(aes(col
 
 
 ```{r}
-ggplot(dec, aes(y=rev(dec$decade)))+geom_text(aes( x=dec$mintemp, y=rev(dec$decade), label=dec$decade, hjust=1.40, ))+geom_point(aes(x=dec$mintemp, colour="steelblue", size=1))+geom_point(aes(x=dec$maxtemp, colour="firebrick1", size=1))+geom_segment(x=dec$mintemp, xend=dec$maxtemp, y=rev(dec$decade), yend=rev(dec$decade), colour="gray")+theme(legend.position = "none", panel.background = element_rect(fill="white"), axis.title.y=element_blank(),axis.text.y=element_blank(),axis.ticks.y=element_blank())+ggtitle("Decade Min-Max Range - Average Annual Temperature (°C)")+theme(plot.title = element_text(colour = "gray59", hjust = .5), axis.text.x = element_text(colour = "gray59"), axis.ticks.x = element_blank(),axis.title.x = element_blank())+coord_capped_cart(xlim = c(25.3,27.45))
+ggplot(dec, aes(y=rev(dec$decade)))+geom_text(aes( x=dec$mintemp, y=rev(dec$decade), label=dec$decade, hjust=1.40, ))+geom_point(aes(x=dec$mintemp, colour="steelblue", size=1))+geom_point(aes(x=dec$maxtemp, colour="firebrick1", size=1))+geom_segment(x=dec$mintemp, xend=dec$maxtemp, y=rev(dec$decade), yend=rev(dec$decade), colour="gray")+theme(legend.position = "none", panel.background = element_rect(fill="white"), axis.title.y=element_blank(),axis.text.y=element_blank(),axis.ticks.y=element_blank())+ggtitle("Decade Min-Max Range - Average Annual Temperature (°C)")+theme(plot.title = element_text(colour = "gray59", hjust = .5), axis.text.x = element_text(colour = "gray59"), axis.ticks.x = element_blank(),axis.title.x = element_blank(), axis.line.x = element_line(colour = "gray59"))+coord_capped_cart(xlim = c(25.3,27.45))
 ```
 
 
