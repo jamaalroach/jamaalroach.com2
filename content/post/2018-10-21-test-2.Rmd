@@ -10,7 +10,7 @@ tags:
 slug: Barbados is getting hotter in four charts
 description: 
 draft: no
-image: img/rays.jpg
+image: img/rays-cover.jpg
 ---
 
 ```{r setup, include=FALSE}
