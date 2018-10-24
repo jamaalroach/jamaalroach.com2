@@ -12,17 +12,15 @@ description:
 draft: no
 image: img/rays-cover.jpg
 
-  
+twitter:
+  -card: summary_large_image
+  -site: "@jamaalroach"
+  -creator: "@jamaalroach"
+  -title: Barbados Is Getting Hotter
+  -description: Visualising Temperature Increase In Barbados
+  -image: img/rays-cover.jpg 
 ---
-+++
-[twitter]
-  card = "summary_large_image"
-  site = "@jamaalroach"
-  creator = "@jamaalroach"
-  title = Barbados Is Getting Hotter"
-  description = "Visualising Temperature Increase In Barbados"
-  image = "img/rays-cover.jpg"
-+++
+
 
 
 ```{r setup, include=FALSE}
