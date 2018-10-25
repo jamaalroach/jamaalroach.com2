@@ -43,13 +43,13 @@ The devil went to hell to escape the heat in Barbados
     </item>
     
     <item>
-      <title>About Me</title>
+      <title>About</title>
       <link>/page/about/</link>
       <pubDate>Fri, 19 Oct 2018 00:00:00 +0000</pubDate>
       
       <guid>/page/about/</guid>
       <description>Hi I’m Jamaal Roach and welcome to my blog.
-This tiny corner of the internet is a space for my fidling around with the statistical R to analyse and visualise data. The posts will mostly be driven by curiosity where a random thought sends me on a quest to find an answer from the available information. I intend to cover a wide range but don’t be too alarmed if there are more than a few posts about football #FC Barcelona.</description>
+This tiny corner of the internet is a space for my fiddling around with R to analyse and visualise data. The posts will mostly be driven by curiosity where a random thought sends me on a quest to find an answer from the available data. I intend to cover a wide range but don’t be too alarmed if there are more than a few posts about football (#FC Barcelona).</description>
     </item>
     
     <item>
