@@ -13,7 +13,8 @@ ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
 [params]
   description = "Updating Priors"
   author = "Jamaal Roach"
-  logo = '/img/me.jpg'
+  logo = "/img/me.jpg"
+  images = ["/img/me.jpg"]
 
 [taxonomies]
   category = "categories"
