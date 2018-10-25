@@ -31,6 +31,7 @@ library(extrafont)
 library(ggplot2)
 library(calibrate)
 library(lemon)
+library(ggalt)
 
 
 ```
@@ -129,17 +130,23 @@ chartxa<-ggplot(davg, aes(x=AVgTemp, y=decade, group=decade))+geom_point(aes(col
 
 
 ```{r}
-ggplot(dec, aes(y=rev(dec$decade)))+geom_text(aes( x=dec$mintemp, y=rev(dec$decade), label=dec$decade, hjust=1.40, ))+geom_point(aes(x=dec$mintemp, colour="steelblue", size=1))+geom_point(aes(x=dec$maxtemp, colour="firebrick1", size=1))+geom_segment(x=dec$mintemp, xend=dec$maxtemp, y=rev(dec$decade), yend=rev(dec$decade), colour="gray")+theme(legend.position = "none", panel.background = element_rect(fill="white"), axis.title.y=element_blank(),axis.text.y=element_blank(),axis.ticks.y=element_blank())+ggtitle("Decade Min-Max Range - Average Annual Temperature (°C)")+theme(plot.title = element_text(colour = "gray59", hjust = .5), axis.text.x = element_text(colour = "gray59"), axis.ticks.x = element_blank(),axis.title.x = element_blank(), axis.line.x = element_line(colour = "gray59"))+coord_capped_cart(xlim = c(25.3,27.45))
+chartmax<-ggplot(dec, aes(y=rev(dec$decade)))+geom_text(aes( x=dec$mintemp, y=rev(dec$decade), label=dec$decade, hjust=1.40, ))+geom_point(aes(x=dec$mintemp, colour="steelblue", size=1))+geom_point(aes(x=dec$maxtemp, colour="firebrick1", size=1))+geom_segment(x=dec$mintemp, xend=dec$maxtemp, y=rev(dec$decade), yend=rev(dec$decade), colour="gray")+theme(legend.position = "none", panel.background = element_rect(fill="white"), axis.title.y=element_blank(),axis.text.y=element_blank(),axis.ticks.y=element_blank())+ggtitle("Decade Min-Max Range - Average Annual Temperature (°C)")+theme(plot.title = element_text(colour = "gray59", hjust = .5), axis.text.x = element_text(colour = "gray59"), axis.ticks.x = element_blank(),axis.title.x = element_blank(), axis.line.x = element_line(colour = "gray59"))+coord_capped_cart(xlim = c(25.3,27.45))
 ```
 
 
 
 
+
+
+
+```{r}
+
+
+                
+ggplot(dec,aes(y=dec$decade, yend=dec$decade, x=dec$mintemp, xend=dec$maxtemp))+geom_segment(colour="violetred1", size=1.5)+geom_dumbbell(size_x = 4, size_xend = 4, colour="violetred1",  colour_xend = "violetred4")+scale_y_continuous(trans = "reverse", breaks=unique(dec$decade))+theme(legend.position = "none", panel.background = element_rect(fill="white"))+ggtitle("Decade Min-Max Range - Average Annual Temperature (°C)")+theme(plot.title = element_text(colour = "gray59", hjust = .5), axis.text.x = element_text(colour = "gray59"), axis.ticks.x = element_blank(),axis.title.x = element_blank(), axis.line.x = element_line(colour = "gray59"))+geom_text(aes(x=dec$mintemp, y=dec$decade, label=dec$mintemp), colour="violetred1", vjust=1.7)+geom_text(aes(x=dec$maxtemp, y=dec$decade, label=dec$maxtemp),colour="violetred4", vjust=1.7)+theme( axis.text.x = element_blank(), axis.line.x = element_blank(), axis.ticks.y = element_blank(),axis.title.y = element_blank(),axis.text.y.left = element_text(colour = "violetred4", size=10, face = "bold"))
+```
+
 I think this is really useful in highlighting just how much hotter the last three decades have been in comparison to the past. Although the 2010's havent quite reached the high of the 2000's - **yet**, its low is above the high of every decade preceeding the 80s and is only 0.1 degrees lower than the highs of the 80's and 90's.  
-
-
-
-
 
 
 # Temperature Anomalies
