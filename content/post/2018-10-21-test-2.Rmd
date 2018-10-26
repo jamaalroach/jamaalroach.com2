@@ -32,6 +32,7 @@ library(ggplot2)
 library(calibrate)
 library(lemon)
 library(ggalt)
+library(gganimate)
 
 
 ```
@@ -92,6 +93,11 @@ chart1
 There is a lot of fluctuation year over year but the upward trajectory is clear. The blue trend line was added to help highlight the average rate of change over the period. You can see the temperature rising gradually from 1901 with an acceleration of the increase from 1970 onwards.Pre 1970 the temperature increased by 0.03 degrees per decade while after 1970 the increase was 0.14 degrees per decade.
 
 
+```{r}
+
+
+
+```
 
 
 
@@ -143,7 +149,7 @@ chartmax<-ggplot(dec, aes(y=rev(dec$decade)))+geom_text(aes( x=dec$mintemp, y=re
 
 
                 
-ggplot(dec,aes(y=dec$decade, yend=dec$decade, x=dec$mintemp, xend=dec$maxtemp))+geom_segment(colour="violetred1", size=1.5)+geom_dumbbell(size_x = 4, size_xend = 4, colour="violetred1",  colour_xend = "violetred4")+scale_y_continuous(trans = "reverse", breaks=unique(dec$decade))+theme(legend.position = "none", panel.background = element_rect(fill="gray98"))+ggtitle("Decade Min-Max Range - Average Annual Temperature (°C)")+theme(plot.title = element_text(colour = "gray59", hjust = .5), axis.text.x = element_text(colour = "gray59"), axis.ticks.x = element_blank(),axis.title.x = element_blank(), axis.line.x = element_line(colour = "gray59"))+geom_text(aes(x=dec$mintemp, y=dec$decade, label=dec$mintemp), colour="violetred1", vjust=1.7)+geom_text(aes(x=dec$maxtemp, y=dec$decade, label=dec$maxtemp),colour="violetred4", vjust=1.7)+theme( axis.text.x = element_blank(), axis.line.x = element_blank(), axis.ticks.y = element_blank(),axis.title.y = element_blank(),axis.text.y.left = element_text(colour = "violetred4", size=10, face = "bold"),panel.grid.major = element_blank(), panel.grid.minor = element_blank())+theme(plot.background = element_rect(fill = "gray98"), axis.line.y = element_line(colour = "violetred4",  size = 1))
+ggplot(dec,aes(y=dec$decade, yend=dec$decade, x=dec$mintemp, xend=dec$maxtemp))+geom_segment(colour="violetred1", size=1)+geom_dumbbell(size_x = 3, size_xend = 3, colour="violetred1",  colour_xend = "violetred4")+scale_y_continuous(trans = "reverse", breaks=unique(dec$decade))+theme(legend.position = "none", panel.background = element_rect(fill="gray98"))+ggtitle("Decade Min-Max Range - Average Annual Temperature (°C)")+theme(plot.title = element_text(colour = "gray59", hjust = .5), axis.text.x = element_text(colour = "gray59"), axis.ticks.x = element_blank(),axis.title.x = element_blank(), axis.line.x = element_line(colour = "gray59"))+geom_text(aes(x=dec$mintemp, y=dec$decade, label=dec$mintemp), colour="violetred1", vjust=1.7)+geom_text(aes(x=dec$maxtemp, y=dec$decade, label=dec$maxtemp),colour="violetred4", vjust=1.7)+theme( axis.text.x = element_blank(), axis.line.x = element_blank(), axis.ticks.y = element_blank(),axis.title.y = element_blank(),axis.text.y.left = element_text(colour = "violetred4", size=10, face = "bold"),panel.grid.major = element_blank(), panel.grid.minor = element_blank())+theme(plot.background = element_rect(fill = "gray98"), axis.line.y = element_line(colour = "violetred4",  size = 1))
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
 ```
 
