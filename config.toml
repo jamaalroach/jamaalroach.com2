@@ -4,7 +4,7 @@ title = "JamaalRoach"
 copyright = "2018 JROACH"
 paginate = 3
 
-googleAnalytics = "     "
+googleAnalytics = "UA-128186065-1"
 disqusShortname = "jamaalroach-com"
 
 theme = "minimage"

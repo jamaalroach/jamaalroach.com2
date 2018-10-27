@@ -4,6 +4,7 @@
       {{ range .Site.Menus.footer }}
       <a class="c-footer-nav-item" href="{{ .URL }}">
         {{ .Name }}
+        {{ template "_internal/google_analytics.html" . }}
       </a>
       {{ end }}
     </nav>
