@@ -1,5 +1,5 @@
 ---
-title: Local Warming | Visualising Temperature Increase In Barbados  
+title: Local Warming | Temperature Increase In Barbados  
 author: JR
 date: '2018-10-21'
 categories:
@@ -10,7 +10,7 @@ tags:
 slug: Barbados Is Getting Hotter in four charts
 description: Barbados Is Getting Hotter
 draft: no
-image: img/rays-cover.jpg
+image: img/bimheat2.jpeg
 images:
 - img/rays-cover.jpg
 
