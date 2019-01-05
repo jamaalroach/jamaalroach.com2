@@ -1,5 +1,5 @@
 ---
-title: Local Warming | Temperature Increase In Barbados  
+title: Local Warming | Visualising Temperature Increase In Barbados  
 author: JR
 date: '2018-10-21'
 categories:
