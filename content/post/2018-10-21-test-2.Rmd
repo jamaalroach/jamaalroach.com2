@@ -12,7 +12,7 @@ description: Barbados Is Getting Hotter
 draft: no
 image: img/bimheat2.jpeg
 images:
-- img/rays-cover.jpg
+- img/bimheat2.jpg
 
 ---
 
