@@ -34,6 +34,7 @@ library(lemon)
 library(ggalt)
 library(gganimate)
 library(transformr)
+library(scales)
 
 
 
@@ -95,11 +96,6 @@ chart1
 There is a lot of fluctuation year over year but the upward trajectory is clear. The blue trend line was added to help highlight the average rate of change over the period. You can see the temperature rising gradually from 1901 with an acceleration of the increase from 1970 onwards.Pre 1970 the temperature increased by 0.03 degrees per decade while after 1970 the increase was 0.14 degrees per decade.
 
 
-```{r}
-
-
-
-```
 
 
 
@@ -115,31 +111,8 @@ This chart compares the the range between the minimum and maximum annual average
 
 
 
-```{r}
-chartx<-ggplot(davg, aes(x=AVgTemp, y=decade, group=decade))+geom_point(aes(color=AVgTemp),pch=15, size=5)+scale_colour_gradient(low="steelblue",high="coral")     +scale_y_continuous(trans = "reverse", labels=davg$decade, breaks = davg$decade)+theme(panel.background = element_rect(fill = "black"), panel.grid.minor = element_line(colour = "black", linetype = 3), panel.grid.major = element_line(colour = "black", linetype = 3))+theme(axis.text.x = element_blank(), axis.ticks = element_blank(),axis.title = element_blank(), legend.position = "top", legend.direction = "horizontal", legend.title = element_text(colour = "black"), legend.background = element_rect(fill = "black"), legend.text = element_text(colour = "white"))+ggtitle("Annual Average Temperature In Decades")+geom_hline(yintercept = c(1895,1905,1915,1925,1935,1945,1955,1965,1975,1985,1995,2005,2015), linetype=3, colour="gray60")+theme(plot.background = element_rect(fill="black"), axis.text.y = element_text(colour="white"),plot.title = element_text(colour = "white", hjust = 0.5))
-
- 
- 
-```
 
 
-
-```{r}
-chartxa<-ggplot(davg, aes(x=AVgTemp, y=decade, group=decade))+geom_point(aes(color=AVgTemp),pch=15, size=5)+scale_colour_gradient(low="steelblue",high="coral")     +scale_y_continuous(trans = "reverse", labels=davg$decade, breaks = davg$decade)+theme(panel.background = element_rect(fill = "white"), panel.grid.minor = element_line(colour = "white", linetype = 3), panel.grid.major = element_line(colour = "white",linetype = 3))+theme (axis.text.x = element_blank(), axis.ticks = element_blank(),axis.title = element_blank(), legend.position = "top", legend.title = element_text(colour = "white"), legend.direction = "horizontal")+ggtitle("Annual Average Temperature In Decades" )+geom_hline(yintercept = c(1895,1905,1915,1925,1935,1945,1955,1965,1975,1985,1995,2005,2015), linetype=3, colour="black")+theme(plot.title = element_text( hjust = 0.5))
-
-
-```
-
-
-
-```{r}
-
-```
-
-
-```{r}
-chartmax<-ggplot(dec, aes(y=rev(dec$decade)))+geom_text(aes( x=dec$mintemp, y=rev(dec$decade), label=dec$decade, hjust=1.40, ))+geom_point(aes(x=dec$mintemp, colour="steelblue", size=1))+geom_point(aes(x=dec$maxtemp, colour="firebrick1", size=1))+geom_segment(x=dec$mintemp, xend=dec$maxtemp, y=rev(dec$decade), yend=rev(dec$decade), colour="gray")+theme(legend.position = "none", panel.background = element_rect(fill="white"), axis.title.y=element_blank(),axis.text.y=element_blank(),axis.ticks.y=element_blank())+ggtitle("Decade Min-Max Range - Average Annual Temperature (°C)")+theme(plot.title = element_text(colour = "gray59", hjust = .5), axis.text.x = element_text(colour = "gray59"), axis.ticks.x = element_blank(),axis.title.x = element_blank(), axis.line.x = element_line(colour = "gray59"))+coord_capped_cart(xlim = c(25.3,27.45))
-```
 
 
 
