@@ -10,7 +10,7 @@ tags:
 slug: Barbados Is Getting Hotter in four charts
 description: Barbados Is Getting Hotter
 draft: no
-image: img/palm.jpg
+image: img/heat.png
 images:
 - img/bimheat2.jpg
 
