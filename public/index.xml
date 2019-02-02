@@ -23,6 +23,16 @@ This is no surprise, everyone knows the earth is getting warmer.</description>
     </item>
     
     <item>
+      <title>#FanGauge | Exploring Sentiment Analysis</title>
+      <link>/post/fan-guage-twitter-sentiment-analysis/</link>
+      <pubDate>Tue, 22 Jan 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/post/fan-guage-twitter-sentiment-analysis/</guid>
+      <description>Ok, so this is not the football related content I had in mind BUT… this analysis of Donald Trump’s tweets on the Variance Explained blog got me thinking about twitter text mining and sentiment analysis.
+Now fooball twitter especially, is a treasure trove of sentiment in 280 characters or less. Everyday football fans tweet about clubs, players, managers and tactics. But what i wanted to focus on are the tweets posted live during games.</description>
+    </item>
+    
+    <item>
       <title>Local Warming | Visualising Temperature Increase In Barbados</title>
       <link>/post/barbados-is-getting-hotter-in-four-charts/</link>
       <pubDate>Sun, 21 Oct 2018 00:00:00 +0000</pubDate>
@@ -30,7 +40,7 @@ This is no surprise, everyone knows the earth is getting warmer.</description>
       <guid>/post/barbados-is-getting-hotter-in-four-charts/</guid>
       <description>Barbados is hot! It’s a tropical paradise in the Caribbean it’s always been hot, but these days, thanks to global warming, it is hotter than ever before. Exactly how hot is it?
 The devil went to hell to escape the heat in Barbados
-&amp;mdash; Kartel black again 🙎🏿‍♂️ (@CorinBailey) July 25, 2018  That sums it up perfectly, the question isn’t if Barbados is getting warmer, that’s a definite.</description>
+&amp;mdash; Unreliable Narrator (@CorinBailey) July 25, 2018  That sums it up perfectly, the question isn’t if Barbados is getting warmer, that’s a definite.</description>
     </item>
     
     <item>
@@ -49,7 +59,7 @@ The devil went to hell to escape the heat in Barbados
       
       <guid>/page/about/</guid>
       <description>Hi I’m Jamaal Roach and welcome to my blog.
-This tiny corner of the internet is a space for my fiddling around with R to analyse and visualise data. The posts will mostly be driven by curiosity where a random thought sends me on a quest to find an answer from the available information. I intend to cover a wide range of subjects but don’t be too alarmed if there are more than a few posts about football (#FC Barcelona).</description>
+Figure 1: MeThis tiny corner of the internet is a space for my fiddling around with R to analyse and visualise data. The posts will mostly be driven by curiosity where a random thought sends me on a quest to find an answer from the available information. I intend to cover a wide range of subjects but don’t be too alarmed if there are more than a few posts about football (#FC Barcelona).</description>
     </item>
     
     <item>

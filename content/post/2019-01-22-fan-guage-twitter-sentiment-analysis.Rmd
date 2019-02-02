@@ -1,0 +1,453 @@
+---
+title: '#FanGauge | Exploring Sentiment Analysis'
+author: ''
+date: '2019-01-22'
+slug: fan-guage-twitter-sentiment-analysis
+categories: []
+tags:
+  - R
+  - Football
+  - Twitter
+description: Twitter Sentiment Analysis
+draft: yes
+image: img/mci.jpg
+images:
+- img/mci.jpg
+
+---
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE)
+```
+
+```{r }
+library(tidyverse)
+library(extrafont)
+library(rtweet)
+library(tidytext)
+library(tidyr)
+library(stringr)
+library(lubridate)
+library(sentimentr)
+library(ggthemes)
+library(mscstexta4r)
+library(formattable)
+library(kableExtra)
+library(emojifont)
+library(scales)
+library(gganimate)
+library(gt)
+```
+
+```{r }
+
+jrtheme <-
+theme_minimal() + theme(
+plot.background = element_rect(fill = "gray97", colour = "gray97"),
+#plot background colour
+panel.grid.major = element_line(colour = "gray93", linetype = "dashed"),
+# major gridline colour
+panel.grid.minor = element_line(colour = "gray95", linetype = "dotted"),
+#remove minor gridlines
+text = element_text(family = "Open Sans"),
+#set plot font
+plot.title = element_text(
+size = 26,
+face = "bold",
+margin = margin(
+t = 5,
+r = 0,
+b = 5,
+l = 0
+)
+),
+# bold plot title and set bottom margin
+axis.title = element_text(face = "bold"),
+#bold axis titles
+axis.title.y = element_text(margin = margin(
+t = 0,
+r = 20,
+b = 0,
+l = 0
+)),
+#set y axis title spacing from axis labels
+axis.title.x = element_text(margin = margin(
+t = 20,
+r = 0,
+b = 0,
+l = 0
+)),
+#set x axis title spacing from axis labels
+plot.subtitle = element_text(size = 16, margin = margin(
+t = 0,
+r = 0,
+b = 20,
+l = 0
+)),
+#set subtitile bottom margin
+plot.caption = element_text(size = 12, face = "bold")
+)# plot caption and set font size
+
+
+loadfonts()
+```
+
+
+Ok, so this is not the football related content I had in mind BUT... [this analysis of Donald Trump's tweets on the Variance Explained blog](http://varianceexplained.org/r/trump-tweets/) got me thinking about twitter text mining and sentiment analysis.
+
+Now fooball twitter especially, is a treasure trove of sentiment in 280 characters or less. Everyday  football fans tweet about clubs, players, managers and tactics. But what i wanted to focus on are the tweets posted live during games.#Fanguage (trademanr and copywrite pending) will be my attaempt to measure the sentiment of fans' and visualise how it changes minute by minute. 
+
+Initially I was going to name this 'the Sentiment-O-Meter, but that didnt perform well in the focus groups and so #FanGauge it is.
+
+
+
+
+##The Game
+
+Manchester City vs Liverpool, second vs first in the [English Premier League]() faced each other on January 3rd, 2019 . It was a match between two of the best and most exciting atacking teams in Europe, managed by Pep Guardiola and Jurgen Klop two of the best managers in world. It was a game with high expectations and it did not disappoint. They were brilliant goals, spectacular saves, beautiful passing sequences, near misses and this...!
+
+```{r , echo=FALSE,  out.width = '100%'}
+knitr::include_graphics("/img/clearance.jpg")
+```
+
+
+Everything needed to take both sets of fans from joy to despair, multiple times over the 90+ minutes of play. The perfect conditions to test #Fangauge.
+
+
+
+```{r}
+city_pool_tweets <- read.csv("citypooltweets.csv")#read data
+city_pool_tweets <-lat_lng(city_pool_tweets)#unnest lattitude and longitude coordinates
+city_pool_tweets <-city_pool_tweets %>% unnest(hashtags)#unnnest hashtags
+
+city_pool_tweeters <-city_pool_tweets[!duplicated(city_pool_tweets$user_id), ]#unique userids
+cpt_location <-city_pool_tweeters %>% group_by(lat, lng) %>% summarise(count = n())#location of unique tweeters
+cpt_location <- na.omit(cpt_location)#removes NAs
+```
+
+
+```{r}
+city_pool_tweets<-city_pool_tweets[!duplicated(city_pool_tweets$status_id),]#remove duplicated tweets
+
+
+#identify clubs fan
+city_pool_tweets <-
+  city_pool_tweets %>% mutate(fanof = if_else(
+  str_detect(description, "mancity"),
+  "MCFC",
+  if_else(
+  str_detect(description, "pool"),
+  "LFC",
+  if_else(
+  str_detect(description, "mcfc"),
+  "MCFC",
+  if_else(
+  str_detect(description, "Manchester City"),
+  "MCFC",
+  if_else(
+  str_detect(description, "MCFC"),
+  "MCFC",
+  if_else(
+  str_detect(description, "Man City"),
+  "MCFC",
+  if_else(
+  str_detect(description, "@LFC"),
+  "LFC",
+  if_else(
+  str_detect(description, "@MCFC"),
+  "MCFC",
+  if_else(
+  str_detect(description, "LFC"),
+  "Liverpool",
+  if_else(
+  str_detect(description, "lfc"),
+  "LFC",
+  if_else(
+  str_detect(description, "City"),
+  "MCFC",
+  if_else(str_detect(description, "moon"), "MCFC", "")
+  )
+  )
+  )
+  )
+  )
+  )
+  )
+  )
+  )
+  )
+  ))
+
+#subset of tweets by identified fans
+citypool_fantweets<-city_pool_tweets%>%filter(fanof=="LFC" | fanof=="MCFC")
+
+#create hour and minute variables
+citypool_fantweets<-citypool_fantweets%>%mutate(hour=hour(created_at))
+citypool_fantweets<-citypool_fantweets%>%mutate(minute=minute(created_at))
+
+#subset tweets during game
+game_tweets<-citypool_fantweets%>%filter(hour>19 & hour<22)
+```
+
+
+```{r}
+#clean up text for sentiment analysis
+game_tweets$cleantext<-iconv(game_tweets$text, "latin1", "ASCII", sub = "")#remoe emoji
+game_tweets$cleantext<-gsub("http.*", "", game_tweets$cleantext)#remove url links
+game_tweets$cleantext<-gsub("[[:punct:]]", "", game_tweets$cleantext) #remove symbols
+game_tweets$cleantext<-gsub("[[:digit:]]", "", game_tweets$cleantext) #remove numbers
+
+#add match minute variable
+game_tweets<-game_tweets%>%mutate(matchminute=ifelse(hour>20, minute+61, minute+1))
+
+
+#get tweet sentiment
+gsentiment<-sentiment(game_tweets$cleantext)
+
+#add sentiment to gametweets datframe
+game_tweets<-cbind(game_tweets, gsentiment$word_count, gsentiment$sentiment)
+
+
+#average sentiment by minute grouped by fanbase
+sentiment_measure<-game_tweets%>%group_by(matchminute, fanof)%>%summarise(sent=mean(`gsentiment$sentiment`))
+
+```
+
+##The Tweets
+
+I searched for and collected tweets containing  "Manchester City" or "Liverpool" or the official hashtag for the game, "#MCILIV" . After removing retweets and duplicates and filtering for only those tweets posted during the game, the challenge was to identify whether the tweets were from fans of the respeoctive clubs. To determine fandom I went with posters who had the club name or ,names associated with the club name, in their account description i.e posters who were self delcared fans. That left me with 1912 tweets, 1208 from 767 Liverpool fans and 704  from 403 Manchester City fans.It isnt surprising Liverpool would have more twitter fans as it is a traditional powerhouse of English football while Manchester City's rise to dominance is a relatively recent occurence
+
+
+```{r}
+
+```
+
+
+.
+
+
+##The Feels
+
+
+> Sentiment analysis is the process of computationally identifying and categorizing opinions expressed in a piece of text, especially in order to determine whether the writer's attitude towards a particular topic, product, etc. is positive, negative, or neutral.
+
+R has a number of options for performing sentiment analysis but I went with the [mscstexta4r package](), which is an interface for [Microsoft Cognitive Services Text Analytics APIs]() . This allows us to leverage Microsoft's [machine learning]() classification algorithm to generate a sentiment score between 0 and 1. Scores closer to 1 indicate positive sentiment, while scores closer to 0 indicate negative sentiment. I have to say this was impressively easy to utilise an for free. All you need is t create an [account]() and register for an API key.
+         
+Now i'm sure the folks at Redmond know what they are doing but let's review the score of a sample of tweets to see if they pass the eye test.
+
+<br>
+
+
+***
+
+
+```{r,  eval=FALSE}
+#get sentiment using microsoft cognitive services text analytics api, code not evaluated to avoid api calls
+
+#breakdown dataframe to vloks less than 1000
+mc_tweets<-game_tweets%>%filter(fanof=="MCFC")
+liv_20_tweets<-game_tweets%>%filter(fanof=="LFC" & hour==20)
+liv_21_tweets<-game_tweets%>%filter(fanof=="LFC" & hour==21)
+
+#get sentimetn score from Microsft Cognitive Services
+textaInit()
+
+docsLanguage <- rep("en", length(mc_tweets$cleantext))
+
+tryCatch({
+  
+  # Perform sentiment analysis
+  ms_mc_sent<-textaSentiment(
+    documents = mc_tweets$cleantext,    # Input sentences or documents
+    languages = docsLanguage
+    # "en"(English, default)|"es"(Spanish)|"fr"(French)|"pt"(Portuguese)
+  )
+  
+}, error = function(err) {
+  
+  # Print error
+  geterrmessage()
+  
+})
+
+
+docsLanguage <- rep("en", length(liv_20_tweets$cleantext))
+
+tryCatch({
+  
+  # Perform sentiment analysis
+  ms_liv20_sent<-textaSentiment(
+    documents = liv_20_tweets$cleantext,    # Input sentences or documents
+    languages = docsLanguage
+    # "en"(English, default)|"es"(Spanish)|"fr"(French)|"pt"(Portuguese)
+  )
+  
+}, error = function(err) {
+  
+  # Print error
+  geterrmessage()
+  
+})
+
+docsLanguage <- rep("en", length(liv_21_tweets$cleantext))
+
+tryCatch({
+  
+  # Perform sentiment analysis
+  ms_liv_21_sent<-textaSentiment(
+    documents = liv_21_tweets$cleantext,    # Input sentences or documents
+    languages = docsLanguage
+    # "en"(English, default)|"es"(Spanish)|"fr"(French)|"pt"(Portuguese)
+  )
+  
+}, error = function(err) {
+  
+  # Print error
+  geterrmessage()
+  
+})
+
+#get sentiment results datafrae
+mc_sent<-ms_mc_sent$results
+liv_20_sent<-ms_liv20_sent$results
+liv_21_sent<-ms_liv21_sent$results
+
+#bind sentiment score to fan datframes
+mc_sent_df<-cbind(mc_tweets, mc_sent)
+liv_20_sent_df<-cbind(liv_20_tweets, liv_20_sent)
+liv_21_sent_df<-cbind(liv_21_tweets, liv_21_sent)
+
+#reunify gametweet dataframe with msc sentimetn score
+liv_20_sent_df$error<-NULL
+game_tweets_ms_sent<-rbind(liv_20_sent_df, liv_21_sent_df, mc_sent_df)
+game_tweets_ms_sent<-game_tweets_ms_sent[!is.na(game_tweets_ms_sent$score),]#remove NAs from score
+names(game_tweets_ms_sent)[87]<-"mstext" #rename duplicated column
+write.csv(game_tweets_ms_sent, file="gametweetms.csv") #saved as csv
+```
+
+
+
+```{r}
+game_tweets_ms_sent<- read.csv("gametweetms.csv") #read
+game_tweets_ms_sent<-game_tweets_ms_sent%>%mutate(score_percent=(round(score*100,2)))
+levels(game_tweets_ms_sent$fanof)<-list(LFC="Liverpool", MCFC="Manchester City")#changed level names of fanof variable
+game_tweets_ms_sent<-game_tweets_ms_sent%>%mutate(sent_level=ifelse(score_percent>50,"Positive", if_else(score_percent<50, "Negative", "Neutral")))#adeed variable
+
+#create sentiment measure data frame
+ms_sentiment_measure<-game_tweets_ms_sent%>%group_by(matchminute, fanof)%>%summarise(sent=mean(score_percent))
+
+
+```
+
+
+
+```{r}
+
+tweet_ranking<-game_tweets_ms_sent%>%select(screen_name, text, fanof, score_percent, matchminute)
+
+
+sample_sent<-tweet_ranking%>%arrange(desc(score_percent))%>%slice(1:2)%>%select(fanof, text, score_percent)#top to tweets
+
+
+low_sent<-tweet_ranking%>%arrange(desc(-score_percent))%>%slice(1:2)%>%select(fanof, text, score_percent)#top to tweets
+
+neutral_sent<-tweet_ranking%>%filter(score_percent==50.00)%>%slice(1:2)%>%select(fanof, text, score_percent)#top to tweets
+
+sample_sent<-rbind(sample_sent,neutral_sent, low_sent)
+
+names(sample_sent)<-c("Fan of", "Tweet", "Sentiment %")
+ 
+
+formattable(sample_sent, align=c("l", "c", "c"))
+
+
+```
+
+
+***
+<br>
+
+
+Only the last one seems inaccurate.Posted by a Manchester City fan at the end of a game they won so I'm pretty the sentiment was positive and the expletiove was for emphasis.  
+
+Next lets see if the calulated sentimentsline up with match events. Below shows the average fan sentiment during the periods each scoreline was held during the game. 
+
+<br>
+
+```{r}
+sent_priorMCFCgoal1 <-
+  game_tweets_ms_sent %>% filter(matchminute < 40) %>% group_by(fanof) %>% summarise(avgsent =
+  mean(score_percent))
+sent_priorMCFCgoal1$score<-c("0-0","0-0")
+sent_afterMCFCgoal1 <-  game_tweets_ms_sent %>% filter(matchminute > 40 &
+  matchminute < 79) %>% group_by(fanof) %>% summarise(avgsent = mean(score_percent))
+sent_afterMCFCgoal1$score<-c("1-0","1-0")
+sent_afterLFCgoal <-  game_tweets_ms_sent %>% filter(matchminute > 79 &
+  matchminute < 87) %>% group_by(fanof) %>% summarise(avgsent = mean(score_percent))
+sent_afterLFCgoal$score<-c("1-1","1-1")
+sent_afterMCFCgoal2 <-  game_tweets_ms_sent %>% filter(matchminute > 87) %>% group_by(fanof) %>% summarise(avgsent =
+  mean(score_percent))
+sent_afterMCFCgoal2$score<-c("2-1","2-1")
+sent_score<-rbind(sent_priorMCFCgoal1, sent_afterMCFCgoal1, sent_afterLFCgoal, sent_afterMCFCgoal2)
+lfc_sent_score<-sent_score%>%filter(fanof=="LFC")
+mcfc_sent_score<-sent_score%>%filter(fanof=="MCFC")
+
+ggplot(lfc_sent_score, aes(x=score,y=avgsent))+geom_step(aes(  group=fanof,colour="firebrick1"), linetype="dashed", alpha=0.5)+geom_step(aes(x=mcfc_sent_score$score, y=mcfc_sent_score$avgsent, group=fanof, colour="lightblue"), linetype="dashed")+geom_point(aes(x=mcfc_sent_score$score, y=mcfc_sent_score$avgsent), colour="lightblue", size=10)+geom_point(aes(x=score,y=avgsent),colour="firebrick1",size=10)+geom_text(aes(x=lfc_sent_score$score, y=lfc_sent_score$avgsent, label=round(lfc_sent_score$avgsent, 0)), colour="white")+geom_text(aes(x=mcfc_sent_score$score, y=mcfc_sent_score$avgsent, label=round(mcfc_sent_score$avgsent, 0)), colour="white")+geom_label(aes(x="0-0", y=52, label="0-0\n LFC fans\nmore positive sentiment"), family="Open Sans", lineheight=0.8, fill="white", label.size = NA) +   jrtheme+theme(plot.background = element_rect(fill = "white", colour="white"),panel.grid.major = element_blank(), panel.grid.minor = element_blank(), axis.text.y = element_blank(), axis.title = element_blank(), axis.text.x = element_text(size=14, face="bold"))+labs(subtitle = "Average sentiment at each score line")+
+ scale_colour_manual(name = 'CLUB',values =c('firebrick1'='firebrick1','lightblue'='lightblue'), labels = c('LFC','MCFC'))+theme(legend.position = "bootom", legend.title = element_blank())+scale_x_discrete(position="top")
+```
+
+<br>
+
+
+
+
+
+0-0 LFC fan sentiment was higher than MCFC's. During this period LFC created the better chances to score including the one cleared off the line.
+
+1-0 to MCFC, their fans senitment score edges ahead of LFC fans'.
+
+1-1  sentiment scores were even.
+
+2 -1 MCFC scored the winning goal which saw their fans sentiment score increase from then to the end of the match.
+
+Its is what you might expect with fan sentiment changing in line with their teams scoring/ conceding goals.
+
+All in all the scores seem reasonable both on the individual tweet level and  aggregate averages which line up with match events.
+
+
+##FanGauge 
+With the sentiment measure in place, lets look at the average sentiment for each minute of the game for each fan base.
+
+<br>
+
+```{r}
+ggplot(ms_sentiment_measure, aes(x = matchminute, y = sent, fill=fanof)) +
+  geom_col() +  jrtheme + labs(
+    subtitle = "Sentiment by minute",
+  y = "Sentiment Score",
+  x = "Minute"
+  ) + theme(
+  legend.position = "none",
+  plot.background = element_rect(fill = "white", colour = "white"),
+  panel.grid.major.x = element_blank(),
+  )+scale_fill_manual(values = c("LFC" ="firebrick1", "MCFC" = "lightblue"))+facet_grid(.~fanof)
+
+
+```
+
+<br>
+
+There we have it, fan sentiment by minute in all its glory, but a gauge suggests movement in real time so lets make a quick animation to bring it to life...and voila #FanGauge!
+
+<br>
+
+```{r}
+gauge<-ggplot(ms_sentiment_measure, aes(x=fanof, y=sent, fill=fanof))+geom_bar(stat="identity")+geom_text(aes(x=fanof, y=sent, label=round(sent,0)), colour="white", size=20, hjust=1.3)+ transition_time(matchminute)+ coord_flip()+scale_fill_manual(values = c("LFC" ="firebrick1", "MCFC" = "lightblue"))+theme_void()+theme(legend.position = "none")+ease_aes("sine-in-out")+labs(title="#FanGauge - MCFC vs LFC", subtitle = "Minute: {frame_time}")+theme(text = element_text(family="Open Sans"), plot.title = element_text(size=20, face="bold"), panel.grid.major = element_line(colour = "white"),panel.grid.minor = element_line(colour = "white"), panel.ontop = TRUE)+enter_grow()+exit_fade()
+
+animate(gauge, fps=2, nframes = 120)
+                        
+```
+
+##Conclusion
+
+
+

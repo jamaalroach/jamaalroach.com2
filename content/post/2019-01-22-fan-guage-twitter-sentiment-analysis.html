@@ -1,0 +1,154 @@
+---
+title: '#FanGauge | Exploring Sentiment Analysis'
+author: ''
+date: '2019-01-22'
+slug: fan-guage-twitter-sentiment-analysis
+categories: []
+tags:
+  - R
+  - Football
+  - Twitter
+description: Twitter Sentiment Analysis
+draft: yes
+image: img/mci.jpg
+images:
+- img/mci.jpg
+
+---
+
+
+
+<p>Ok, so this is not the football related content I had in mind BUT… <a href="http://varianceexplained.org/r/trump-tweets/">this analysis of Donald Trump’s tweets on the Variance Explained blog</a> got me thinking about twitter text mining and sentiment analysis.</p>
+<p>Now fooball twitter especially, is a treasure trove of sentiment in 280 characters or less. Everyday football fans tweet about clubs, players, managers and tactics. But what i wanted to focus on are the tweets posted live during games.#Fanguage (trademanr and copywrite pending) will be my attaempt to measure the sentiment of fans’ and visualise how it changes minute by minute.</p>
+<p>Initially I was going to name this ’the Sentiment-O-Meter, but that didnt perform well in the focus groups and so #FanGauge it is.</p>
+<div id="the-game" class="section level2">
+<h2>The Game</h2>
+<p>Manchester City vs Liverpool, second vs first in the <a href="">English Premier League</a> faced each other on January 3rd, 2019 . It was a match between two of the best and most exciting atacking teams in Europe, managed by Pep Guardiola and Jurgen Klop two of the best managers in world. It was a game with high expectations and it did not disappoint. They were brilliant goals, spectacular saves, beautiful passing sequences, near misses and this…!</p>
+<p><img src="/img/clearance.jpg" width="100%" /></p>
+<p>Everything needed to take both sets of fans from joy to despair, multiple times over the 90+ minutes of play. The perfect conditions to test #Fangauge.</p>
+</div>
+<div id="the-tweets" class="section level2">
+<h2>The Tweets</h2>
+<p>I searched for and collected tweets containing “Manchester City” or “Liverpool” or the official hashtag for the game, “#MCILIV” . After removing retweets and duplicates and filtering for only those tweets posted during the game, the challenge was to identify whether the tweets were from fans of the respeoctive clubs. To determine fandom I went with posters who had the club name or ,names associated with the club name, in their account description i.e posters who were self delcared fans. That left me with 1912 tweets, 1208 from 767 Liverpool fans and 704 from 403 Manchester City fans.It isnt surprising Liverpool would have more twitter fans as it is a traditional powerhouse of English football while Manchester City’s rise to dominance is a relatively recent occurence</p>
+<p>.</p>
+</div>
+<div id="the-feels" class="section level2">
+<h2>The Feels</h2>
+<blockquote>
+<p>Sentiment analysis is the process of computationally identifying and categorizing opinions expressed in a piece of text, especially in order to determine whether the writer’s attitude towards a particular topic, product, etc. is positive, negative, or neutral.</p>
+</blockquote>
+<p>R has a number of options for performing sentiment analysis but I went with the <a href="">mscstexta4r package</a>, which is an interface for <a href="">Microsoft Cognitive Services Text Analytics APIs</a> . This allows us to leverage Microsoft’s <a href="">machine learning</a> classification algorithm to generate a sentiment score between 0 and 1. Scores closer to 1 indicate positive sentiment, while scores closer to 0 indicate negative sentiment. I have to say this was impressively easy to utilise an for free. All you need is t create an <a href="">account</a> and register for an API key.</p>
+<p>Now i’m sure the folks at Redmond know what they are doing but let’s review the score of a sample of tweets to see if they pass the eye test.</p>
+<p><br></p>
+<hr />
+<table class="table table-condensed">
+<thead>
+<tr>
+<th style="text-align:left;">
+Fan of
+</th>
+<th style="text-align:center;">
+Tweet
+</th>
+<th style="text-align:center;">
+Sentiment %
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+MCFC
+</td>
+<td style="text-align:center;">
+<span class="citation">@ManCity</span> YESSSSSSSSSSSSSSSSSSSSSASSSSSSSSSSSSSSSSSSSSSS!!!!!!!!! Thank you, City!!!! <U+0001F499><U+0001F499><U+0001F499><U+0001F499><U+0001F499><U+0001F499><U+0001F499><U+0001F499><U+0001F499><U+0001F499><U+0001F499><U+0001F499><U+0001F499><U+0001F499><U+0001F499><U+0001F499><U+0001F499><U+0001F499><U+0001F499><U+0001F499><U+0001F499><U+0001F499><U+0001F499><U+0001F499><U+0001F499><U+0001F499><U+0001F499><U+0001F499><U+0001F499><U+0001F499><U+0001F499><U+0001F499><U+0001F499><U+0001F499><U+0001F499> <span class="citation">@aguerosergiokun</span> and <span class="citation">@LeroySane19</span> are the best!!!!!!!! #MCFC #MCILIV #ManCity
+</td>
+<td style="text-align:center;">
+99.85
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+MCFC
+</td>
+<td style="text-align:center;">
+So glad Man City have beat Liverpool WOW
+</td>
+<td style="text-align:center;">
+99.81
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+LFC
+</td>
+<td style="text-align:center;">
+Man City 1-0 Liverpool <a href="https://t.co/Psq7ARdMQy" class="uri">https://t.co/Psq7ARdMQy</a>
+</td>
+<td style="text-align:center;">
+50.00
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+LFC
+</td>
+<td style="text-align:center;">
+<p><U+2753> Where do we go from here in the second half?</p>
+<U+0001F449> <a href="https://t.co/Uws9l53IHq" class="uri">https://t.co/Uws9l53IHq</a> <a href="https://t.co/TbolrwiRPH" class="uri">https://t.co/TbolrwiRPH</a>
+</td>
+<td style="text-align:center;">
+50.00
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+LFC
+</td>
+<td style="text-align:center;">
+Damn 2-1 City #MCILIV
+</td>
+<td style="text-align:center;">
+0.30
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+MCFC
+</td>
+<td style="text-align:center;">
+Fucking City!!!! #MCILIV
+</td>
+<td style="text-align:center;">
+0.30
+</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<p><br></p>
+<p>Only the last one seems inaccurate.Posted by a Manchester City fan at the end of a game they won so I’m pretty the sentiment was positive and the expletiove was for emphasis.</p>
+<p>Next lets see if the calulated sentimentsline up with match events. Below shows the average fan sentiment during the periods each scoreline was held during the game.</p>
+<p><br></p>
+<p><img src="/post/2019-01-22-fan-guage-twitter-sentiment-analysis_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
+<p><br></p>
+<p>0-0 LFC fan sentiment was higher than MCFC’s. During this period LFC created the better chances to score including the one cleared off the line.</p>
+<p>1-0 to MCFC, their fans senitment score edges ahead of LFC fans’.</p>
+<p>1-1 sentiment scores were even.</p>
+<p>2 -1 MCFC scored the winning goal which saw their fans sentiment score increase from then to the end of the match.</p>
+<p>Its is what you might expect with fan sentiment changing in line with their teams scoring/ conceding goals.</p>
+<p>All in all the scores seem reasonable both on the individual tweet level and aggregate averages which line up with match events.</p>
+</div>
+<div id="fangauge" class="section level2">
+<h2>FanGauge</h2>
+<p>With the sentiment measure in place, lets look at the average sentiment for each minute of the game for each fan base.</p>
+<p><br></p>
+<p><img src="/post/2019-01-22-fan-guage-twitter-sentiment-analysis_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
+<p><br></p>
+<p>There we have it, fan sentiment by minute in all its glory, but a gauge suggests movement in real time so lets make a quick animation to bring it to life…and voila #FanGauge!</p>
+<p><br></p>
+<p><img src="/post/2019-01-22-fan-guage-twitter-sentiment-analysis_files/figure-html/unnamed-chunk-13-1.gif" /><!-- --></p>
+</div>
+<div id="conclusion" class="section level2">
+<h2>Conclusion</h2>
+</div>

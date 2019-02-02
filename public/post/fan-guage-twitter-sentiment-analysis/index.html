@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge,chrome=1">
+  <title>#FanGauge | Exploring Sentiment Analysis &middot; JamaalRoach - Updating Priors</title>
+  <meta name="generator" content="Hugo 0.48" />
+  
+  <meta name="description" content="Updating Priors"> 
+  <meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="/img/mci.jpg"/>
+
+<meta name="twitter:title" content="#FanGauge | Exploring Sentiment Analysis"/>
+<meta name="twitter:description" content="Twitter Sentiment Analysis"/>
+
+  <meta property="og:title" content="#FanGauge | Exploring Sentiment Analysis" />
+<meta property="og:description" content="Twitter Sentiment Analysis" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/post/fan-guage-twitter-sentiment-analysis/" />
+<meta property="og:image" content="/img/mci.jpg" />
+<meta property="article:published_time" content="2019-01-22T00:00:00&#43;00:00"/>
+<meta property="article:modified_time" content="2019-01-22T00:00:00&#43;00:00"/>
+  <!-- RSS autodiscovery -->
+  
+  
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-128186065-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+
+  
+<meta itemprop="name" content="#FanGauge | Exploring Sentiment Analysis">
+<meta itemprop="description" content="Twitter Sentiment Analysis">
+
+
+<meta itemprop="datePublished" content="2019-01-22T00:00:00&#43;00:00" />
+<meta itemprop="dateModified" content="2019-01-22T00:00:00&#43;00:00" />
+<meta itemprop="wordCount" content="793">
+
+  <meta itemprop="image" content="/img/mci.jpg">
+
+
+
+<meta itemprop="keywords" content="R,Football,Twitter," />
+
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/5.0.0/sanitize.min.css" rel="stylesheet">
+  <link href="/css/application.css" rel="stylesheet">
+  <link rel="stylesheet" href="/css/github-gist.css" rel="stylesheet" id="theme-stylesheet">
+<script src="/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+</head>
+
+
+<body>
+  <header class="c-global-header">
+  <div class="c-container c-container--medium">
+    <div class="c-global-header__inner">
+      <div class="c-global-header__primary">
+        <h1 class="c-brand">
+          <a href="/">JamaalRoach</a>
+        </h1>
+        <p class="c-description">Updating Priors</p>
+      </div>
+      <div class="c-global-header__utility">
+        <button type="button" class="c-menu">
+          <svg class="icon icon-menu">
+            <use xlink:href="#icon-menu"></use>
+            <symbol id="icon-menu" viewBox="0 0 32 32">
+              <title>menu</title>
+              <path d="M2 6h28v6h-28zM2 14h28v6h-28zM2 22h28v6h-28z"></path>
+            </symbol>
+          </svg>
+        </button>
+      </div>
+      <div class="c-overlay">
+  <div class="c-container">
+    <nav class="c-global-nav">
+      <div class="c-global-nav__closer">
+        <svg class="icon icon-cross">
+          <use xlink:href="#icon-cross"></use>
+          <symbol id="icon-cross" viewBox="0 0 32 32">
+            <title>cross</title>
+            <path d="M31.708 25.708c-0-0-0-0-0-0l-9.708-9.708 9.708-9.708c0-0 0-0 0-0 0.105-0.105 0.18-0.227 0.229-0.357 0.133-0.356 0.057-0.771-0.229-1.057l-4.586-4.586c-0.286-0.286-0.702-0.361-1.057-0.229-0.13 0.048-0.252 0.124-0.357 0.228 0 0-0 0-0 0l-9.708 9.708-9.708-9.708c-0-0-0-0-0-0-0.105-0.104-0.227-0.18-0.357-0.228-0.356-0.133-0.771-0.057-1.057 0.229l-4.586 4.586c-0.286 0.286-0.361 0.702-0.229 1.057 0.049 0.13 0.124 0.252 0.229 0.357 0 0 0 0 0 0l9.708 9.708-9.708 9.708c-0 0-0 0-0 0-0.104 0.105-0.18 0.227-0.229 0.357-0.133 0.355-0.057 0.771 0.229 1.057l4.586 4.586c0.286 0.286 0.702 0.361 1.057 0.229 0.13-0.049 0.252-0.124 0.357-0.229 0-0 0-0 0-0l9.708-9.708 9.708 9.708c0 0 0 0 0 0 0.105 0.105 0.227 0.18 0.357 0.229 0.356 0.133 0.771 0.057 1.057-0.229l4.586-4.586c0.286-0.286 0.362-0.702 0.229-1.057-0.049-0.13-0.124-0.252-0.229-0.357z"></path>
+          </symbol>
+        </svg>
+      </div>
+      
+      <div class="c-global-nav__item">
+        <a class="c-link" href="/page/about/">
+          About
+        </a>
+      </div>
+      
+      <div class="c-global-nav__item">
+        <a class="c-link" href="/page/contact/">
+          Contact
+        </a>
+      </div>
+      
+    </nav>
+  </div>
+</div>
+
+    </div>
+  </div>
+</header>
+
+
+  <main class="c-main-content">
+    
+  <div class="p-single">
+    <div class="c-container">
+      <article class="c-post">
+        <header class="c-post__header">
+          <h1 class="c-post__title">#FanGauge | Exploring Sentiment Analysis</h1>
+          <div class="c-post__header__meta">
+            <time class="c-pub-time" datetime=" 2019-01-22T00:00:00Z ">
+              2019.01.22
+            </time>
+            
+            <div class="c-tag">
+              
+              <a class="c-tag__item c-link" href="/tags/r">R</a>
+              
+              <a class="c-tag__item c-link" href="/tags/football">Football</a>
+              
+              <a class="c-tag__item c-link" href="/tags/twitter">Twitter</a>
+              
+            </div>
+            
+          </div>
+          
+          <div class="c-thumb c-bg-img" style="background-image: url('/img/mci.jpg')"></div>
+          
+        </header>
+        <div class="c-post__body">
+          <p>Ok, so this is not the football related content I had in mind BUT… <a href="http://varianceexplained.org/r/trump-tweets/">this analysis of Donald Trump’s tweets on the Variance Explained blog</a> got me thinking about twitter text mining and sentiment analysis.</p>
+<p>Now fooball twitter especially, is a treasure trove of sentiment in 280 characters or less. Everyday football fans tweet about clubs, players, managers and tactics. But what i wanted to focus on are the tweets posted live during games.#Fanguage (trademanr and copywrite pending) will be my attaempt to measure the sentiment of fans’ and visualise how it changes minute by minute.</p>
+<p>Initially I was going to name this ’the Sentiment-O-Meter, but that didnt perform well in the focus groups and so #FanGauge it is.</p>
+<div id="the-game" class="section level2">
+<h2>The Game</h2>
+<p>Manchester City vs Liverpool, second vs first in the <a href="">English Premier League</a> faced each other on January 3rd, 2019 . It was a match between two of the best and most exciting atacking teams in Europe, managed by Pep Guardiola and Jurgen Klop two of the best managers in world. It was a game with high expectations and it did not disappoint. They were brilliant goals, spectacular saves, beautiful passing sequences, near misses and this…!</p>
+<p><img src="/img/clearance.jpg" width="100%" /></p>
+<p>Everything needed to take both sets of fans from joy to despair, multiple times over the 90+ minutes of play. The perfect conditions to test #Fangauge.</p>
+</div>
+<div id="the-tweets" class="section level2">
+<h2>The Tweets</h2>
+<p>I searched for and collected tweets containing “Manchester City” or “Liverpool” or the official hashtag for the game, “#MCILIV” . After removing retweets and duplicates and filtering for only those tweets posted during the game, the challenge was to identify whether the tweets were from fans of the respeoctive clubs. To determine fandom I went with posters who had the club name or ,names associated with the club name, in their account description i.e posters who were self delcared fans. That left me with 1912 tweets, 1208 from 767 Liverpool fans and 704 from 403 Manchester City fans.It isnt surprising Liverpool would have more twitter fans as it is a traditional powerhouse of English football while Manchester City’s rise to dominance is a relatively recent occurence</p>
+<p>.</p>
+</div>
+<div id="the-feels" class="section level2">
+<h2>The Feels</h2>
+<blockquote>
+<p>Sentiment analysis is the process of computationally identifying and categorizing opinions expressed in a piece of text, especially in order to determine whether the writer’s attitude towards a particular topic, product, etc. is positive, negative, or neutral.</p>
+</blockquote>
+<p>R has a number of options for performing sentiment analysis but I went with the <a href="">mscstexta4r package</a>, which is an interface for <a href="">Microsoft Cognitive Services Text Analytics APIs</a> . This allows us to leverage Microsoft’s <a href="">machine learning</a> classification algorithm to generate a sentiment score between 0 and 1. Scores closer to 1 indicate positive sentiment, while scores closer to 0 indicate negative sentiment. I have to say this was impressively easy to utilise an for free. All you need is t create an <a href="">account</a> and register for an API key.</p>
+<p>Now i’m sure the folks at Redmond know what they are doing but let’s review the score of a sample of tweets to see if they pass the eye test.</p>
+<p><br></p>
+<hr />
+<table class="table table-condensed">
+<thead>
+<tr>
+<th style="text-align:left;">
+Fan of
+</th>
+<th style="text-align:center;">
+Tweet
+</th>
+<th style="text-align:center;">
+Sentiment %
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+MCFC
+</td>
+<td style="text-align:center;">
+<span class="citation">@ManCity</span> YESSSSSSSSSSSSSSSSSSSSSASSSSSSSSSSSSSSSSSSSSSS!!!!!!!!! Thank you, City!!!! <U+0001F499><U+0001F499><U+0001F499><U+0001F499><U+0001F499><U+0001F499><U+0001F499><U+0001F499><U+0001F499><U+0001F499><U+0001F499><U+0001F499><U+0001F499><U+0001F499><U+0001F499><U+0001F499><U+0001F499><U+0001F499><U+0001F499><U+0001F499><U+0001F499><U+0001F499><U+0001F499><U+0001F499><U+0001F499><U+0001F499><U+0001F499><U+0001F499><U+0001F499><U+0001F499><U+0001F499><U+0001F499><U+0001F499><U+0001F499><U+0001F499> <span class="citation">@aguerosergiokun</span> and <span class="citation">@LeroySane19</span> are the best!!!!!!!! #MCFC #MCILIV #ManCity
+</td>
+<td style="text-align:center;">
+99.85
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+MCFC
+</td>
+<td style="text-align:center;">
+So glad Man City have beat Liverpool WOW
+</td>
+<td style="text-align:center;">
+99.81
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+LFC
+</td>
+<td style="text-align:center;">
+Man City 1-0 Liverpool <a href="https://t.co/Psq7ARdMQy" class="uri">https://t.co/Psq7ARdMQy</a>
+</td>
+<td style="text-align:center;">
+50.00
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+LFC
+</td>
+<td style="text-align:center;">
+<p><U+2753> Where do we go from here in the second half?</p>
+<U+0001F449> <a href="https://t.co/Uws9l53IHq" class="uri">https://t.co/Uws9l53IHq</a> <a href="https://t.co/TbolrwiRPH" class="uri">https://t.co/TbolrwiRPH</a>
+</td>
+<td style="text-align:center;">
+50.00
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+LFC
+</td>
+<td style="text-align:center;">
+Damn 2-1 City #MCILIV
+</td>
+<td style="text-align:center;">
+0.30
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+MCFC
+</td>
+<td style="text-align:center;">
+Fucking City!!!! #MCILIV
+</td>
+<td style="text-align:center;">
+0.30
+</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<p><br></p>
+<p>Only the last one seems inaccurate.Posted by a Manchester City fan at the end of a game they won so I’m pretty the sentiment was positive and the expletiove was for emphasis.</p>
+<p>Next lets see if the calulated sentimentsline up with match events. Below shows the average fan sentiment during the periods each scoreline was held during the game.</p>
+<p><br></p>
+<p><img src="/post/2019-01-22-fan-guage-twitter-sentiment-analysis_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
+<p><br></p>
+<p>0-0 LFC fan sentiment was higher than MCFC’s. During this period LFC created the better chances to score including the one cleared off the line.</p>
+<p>1-0 to MCFC, their fans senitment score edges ahead of LFC fans’.</p>
+<p>1-1 sentiment scores were even.</p>
+<p>2 -1 MCFC scored the winning goal which saw their fans sentiment score increase from then to the end of the match.</p>
+<p>Its is what you might expect with fan sentiment changing in line with their teams scoring/ conceding goals.</p>
+<p>All in all the scores seem reasonable both on the individual tweet level and aggregate averages which line up with match events.</p>
+</div>
+<div id="fangauge" class="section level2">
+<h2>FanGauge</h2>
+<p>With the sentiment measure in place, lets look at the average sentiment for each minute of the game for each fan base.</p>
+<p><br></p>
+<p><img src="/post/2019-01-22-fan-guage-twitter-sentiment-analysis_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
+<p><br></p>
+<p>There we have it, fan sentiment by minute in all its glory, but a gauge suggests movement in real time so lets make a quick animation to bring it to life…and voila #FanGauge!</p>
+<p><br></p>
+<p><img src="/post/2019-01-22-fan-guage-twitter-sentiment-analysis_files/figure-html/unnamed-chunk-13-1.gif" /><!-- --></p>
+</div>
+<div id="conclusion" class="section level2">
+<h2>Conclusion</h2>
+</div>
+
+        </div>
+
+        <footer class="c-post__footer">
+          <aside class="c-share">
+  <h2 class="c-share__title">Share</h2>
+  <div class="c-share__list">
+    <a class="c-share__list__item c-link" href="http://twitter.com/intent/tweet?text=%23FanGauge%20%7c%20Exploring%20Sentiment%20Analysis%20%7C%20JamaalRoach%20%2fpost%2ffan-guage-twitter-sentiment-analysis%2f" target="_blank">
+      <svg class="icon icon-twitter">
+        <use xlink:href="#icon-twitter"></use>
+        <symbol id="icon-twitter" viewBox="0 0 32 32">
+          <title>twitter</title>
+          <path d="M32 7.075c-1.175 0.525-2.444 0.875-3.769 1.031 1.356-0.813 2.394-2.1 2.887-3.631-1.269 0.75-2.675 1.3-4.169 1.594-1.2-1.275-2.906-2.069-4.794-2.069-3.625 0-6.563 2.938-6.563 6.563 0 0.512 0.056 1.012 0.169 1.494-5.456-0.275-10.294-2.888-13.531-6.862-0.563 0.969-0.887 2.1-0.887 3.3 0 2.275 1.156 4.287 2.919 5.463-1.075-0.031-2.087-0.331-2.975-0.819 0 0.025 0 0.056 0 0.081 0 3.181 2.263 5.838 5.269 6.437-0.55 0.15-1.131 0.231-1.731 0.231-0.425 0-0.831-0.044-1.237-0.119 0.838 2.606 3.263 4.506 6.131 4.563-2.25 1.762-5.075 2.813-8.156 2.813-0.531 0-1.050-0.031-1.569-0.094 2.913 1.869 6.362 2.95 10.069 2.95 12.075 0 18.681-10.006 18.681-18.681 0-0.287-0.006-0.569-0.019-0.85 1.281-0.919 2.394-2.075 3.275-3.394z"></path>
+        </symbol>
+      </svg>
+    </a>
+
+    <a class="c-share__list__item c-link" href="https://www.facebook.com/sharer/sharer.php?u=%2fpost%2ffan-guage-twitter-sentiment-analysis%2f" target="_blank">
+      <svg class="icon icon-facebook">
+        <use xlink:href="#icon-facebook"></use>
+        <symbol id="icon-facebook" viewBox="0 0 32 32">
+          <title>facebook</title>
+          <path d="M19 6h5v-6h-5c-3.86 0-7 3.14-7 7v3h-4v6h4v16h6v-16h5l1-6h-6v-3c0-0.542 0.458-1 1-1z"></path>
+        </symbol>
+      </svg>
+    </a>
+
+    <a class="c-share__list__item" href="http://getpocket.com/edit?url=%2fpost%2ffan-guage-twitter-sentiment-analysis%2f" target="_blank">
+      <svg class="icon icon-get-pocket">
+        <use xlink:href="#icon-get-pocket"></use>
+        <symbol id="icon-get-pocket" viewBox="0 0 27 28">
+          <title>get-pocket</title>
+          <path d="M24.453 2c1.359 0 2.422 1.094 2.422 2.438v8.109c0 7.484-5.984 13.453-13.422 13.453-7.469 0-13.453-5.969-13.453-13.453v-8.109c0-1.328 1.109-2.438 2.438-2.438h22.016zM13.453 18.625c0.469 0 0.938-0.187 1.281-0.516l6.312-6.062c0.359-0.344 0.578-0.828 0.578-1.328 0-1.016-0.828-1.844-1.844-1.844-0.484 0-0.938 0.187-1.281 0.516l-5.047 4.844-5.047-4.844c-0.344-0.328-0.797-0.516-1.266-0.516-1.016 0-1.844 0.828-1.844 1.844 0 0.5 0.203 0.984 0.562 1.328l6.328 6.062c0.328 0.328 0.797 0.516 1.266 0.516z"></path>
+        </symbol>
+      </svg>
+    </a>
+  </div>
+</aside>
+
+          
+         <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "jamaalroach-com" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+          <div class="c-pager">
+  <ul class="c-pager__list">
+    
+    <li class="c-pager__list__item c-pager__list__item--prev">
+      <a class="c-link" href="/post/barbados-is-getting-hotter-in-four-charts/" data-toggle="tooltip" data-placement="top" title="Local Warming | Visualising Temperature Increase In Barbados">&larr; Previous Post</a>
+    </li>
+     
+    <li class="c-pager__list__item c-pager__list__item--next">
+      <a class="c-link" href="/post/hott/" data-toggle="tooltip" data-placement="top" title="SPRING GARDEN ON FYAH!">Next Post &rarr;</a>
+    </li>
+    
+  </ul>
+</div>
+
+
+          
+
+<nav class="related-articles js-related-articles">
+  <h2 class="related-articles__headline">Related Contents</h2>
+  <ul class="related-articles__links">
+    
+    <li class="related-articles__links__item js-items">
+      <article class="related-article">
+        <p class="related-article__stock">2018.10.21.</p>
+        <p class="related-article__title">
+          <a class="related-article__link" href="/post/barbados-is-getting-hotter-in-four-charts/">Local Warming | Visualising Temperature Increase In Barbados</a>
+        </p>
+        <p class="related-article__tags">
+          
+          <span class="related-article__tags__item">
+            Barbados
+          </span>
+          
+          <span class="related-article__tags__item">
+            R
+          </span>
+           </p>
+      </article>
+    </li>
+    
+  </ul>
+</nav>
+
+
+        </footer>
+        <script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "NewsArticle",
+  "mainEntityOfPage": {
+    "@type": "NewsArticle",
+    "@id": "/post/fan-guage-twitter-sentiment-analysis/",
+    "headline": "&lt;p&gt;Ok, so this is not the football related content I had in mind BUT… &lt;a href=&#34;http://varianceexplained.org/r/",
+    "author": "Jamaal Roach",
+    "publisher": {
+      "@type": "Organization",
+      "name": "Jamaal Roach",
+      "logo": "//img/me.jpg",
+    },
+    "image": "/img/mci.jpg",
+    "datePublished": "2019-01-22"
+  },
+  "headline": "&lt;p&gt;Ok, so this is not the football related content I had in mind BUT… &lt;a href=&#34;http://varianceexplained.org/r/",
+  "alternativeHeadline": "JamaalRoach",
+  "datePublished": "2019-01-22",
+  "dateModified": "2019-01-22",
+  "url": "/post/fan-guage-twitter-sentiment-analysis/",
+  "wordCount": "793",
+  "author": {
+    "@type": "Person",
+    "name": "Jamaal Roach"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Jamaal Roach"
+  },
+  "image": "",
+  
+  "keywords": "RFootballTwitter",
+  "description": "Twitter Sentiment Analysis"
+}
+</script>
+
+      </article>
+    </div>
+  </div>
+
+  </main>
+
+  <footer class="c-global-footer">
+  <div class="c-container c-container--medium">
+    <nav class="c-footer-nav">
+      
+    </nav>
+    <p class="c-copy"><small>2018 JROACH</small></p>
+  </div>
+</footer>
+
+
+  <script src="/js/application.js"></script>
+</body>
+</html>

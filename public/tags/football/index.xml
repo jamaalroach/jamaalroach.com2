@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Football on JamaalRoach</title>
+    <link>/tags/football/</link>
+    <description>Recent content in Football on JamaalRoach</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <copyright>2018 JROACH</copyright>
+    <lastBuildDate>Tue, 22 Jan 2019 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/tags/football/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>#FanGauge | Exploring Sentiment Analysis</title>
+      <link>/post/fan-guage-twitter-sentiment-analysis/</link>
+      <pubDate>Tue, 22 Jan 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/post/fan-guage-twitter-sentiment-analysis/</guid>
+      <description>Ok, so this is not the football related content I had in mind BUT… this analysis of Donald Trump’s tweets on the Variance Explained blog got me thinking about twitter text mining and sentiment analysis.
+Now fooball twitter especially, is a treasure trove of sentiment in 280 characters or less. Everyday football fans tweet about clubs, players, managers and tactics. But what i wanted to focus on are the tweets posted live during games.</description>
+    </item>
+    
+  </channel>
+</rss>
