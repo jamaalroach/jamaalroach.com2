@@ -8,6 +8,7 @@ googleAnalytics = "UA-128186065-1"
 disqusShortname = "jamaalroach-com"
 
 theme = "minimage"
+
 ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
 
 [params]

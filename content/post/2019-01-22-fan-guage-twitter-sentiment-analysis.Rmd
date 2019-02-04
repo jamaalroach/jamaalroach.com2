@@ -92,7 +92,7 @@ loadfonts()
 ```
 
 
-Ok, so this is not the football related content I had in mind BUT... [this analysis of Donald Trump's tweets on the Variance Explained blog](http://varianceexplained.org/r/trump-tweets/) got me thinking about twitter text mining and sentiment analysis.
+Ok, so this is not the football related content I had in mind *BUT* [this analysis of Donald Trump's tweets on the Variance Explained blog](http://varianceexplained.org/r/trump-tweets/) got me thinking about twitter text mining and sentiment analysis.
 
 Now fooball twitter especially, is a treasure trove of sentiment in 280 characters or less. Everyday  football fans tweet about clubs, players, managers and tactics. But what i wanted to focus on are the tweets posted live during games.#Fanguage (trademanr and copywrite pending) will be my attaempt to measure the sentiment of fans' and visualise how it changes minute by minute. 
 
